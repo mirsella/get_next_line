@@ -6,7 +6,7 @@
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:54:00 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/16 17:21:35 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:33:25 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,26 @@ char	*get_line_from_buffer(char *storage)
 	return (str);
 }
 
-// char	*get_end_of_buffer(char *storage)
-// {
-// }
+char	*get_end_of_buffer(char *storage)
+{
+	char	*str;
+	int	i;
+
+	i = 0;
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	if (storage[i] == '\0')
+		return (NULL);
+	str = malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
+	ft_strlcpy(str, storage + i + 1, ft_strlen(storage) - i + 1);
+	return (str);
+}
 
 char	*get_next_line(int fd)
 {
 	static char	*storage;
 	char	*line;
+	char	*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -72,7 +84,9 @@ char	*get_next_line(int fd)
 	if (!storage)
 		return (NULL);
 	line = get_line_from_buffer(storage);
-	// storage = get_end_of_buffer(storage);
+	tmp = get_end_of_buffer(storage);
+	free(storage);
+	storage = tmp;
 	return (line);
 }
 
