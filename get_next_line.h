@@ -6,7 +6,7 @@
 /*   By: root </var/spool/mail/mirsella>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:08:27 by root              #+#    #+#             */
-/*   Updated: 2022/11/16 17:19:19 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:12:51 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "stdlib.h"
 # include "unistd.h"
+
+# include "stdio.h"
+# include "fcntl.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
@@ -25,7 +28,7 @@ char	*ft_strchr(const char *s, int c);
 void	*ft_memset(void *s, int c, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 
 #endif

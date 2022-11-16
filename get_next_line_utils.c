@@ -6,7 +6,7 @@
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:34:19 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/16 17:18:46 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:30:26 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ char	*ft_strchr(const char *s, int c)
 		s++;
 	}
 	return ((char *)s);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	unsigned char	*p_s;
-
-	p_s = s;
-	while (n--)
-		*p_s++ = c;
-	return (s);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
@@ -78,17 +68,24 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (i + ft_strlen(src));
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 
-	if (!s1 || !s2)
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char));
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}
+	if (!s2)
 		return (NULL);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
-	ft_memset(str, 0, ft_strlen(s1) + ft_strlen(s2) + 1);
-	ft_strlcat(str, s1, ft_strlen(s1) + 1);
+	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
 	ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	free(s1);
 	return (str);
 }
