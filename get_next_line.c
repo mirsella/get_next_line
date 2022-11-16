@@ -6,7 +6,7 @@
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:54:00 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/16 18:38:19 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:45:16 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*read_next_line(int fd, char *storage)
 		return (NULL);
 	buffer[0] = '\0';
 	ret = 1;
-	while (ret && !ft_strchr(buffer, '\n'))
+	while (ret > 0 && !ft_strchr(buffer, '\n'))
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
-		if (ret)
+		if (ret > 0)
 		{
 			buffer[ret] = '\0';
 			storage = ft_strjoin(storage, buffer);
@@ -68,13 +68,13 @@ char	*get_end_of_buffer(char *storage)
 	str = malloc(sizeof(char) * (ft_strlen(storage) - i + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, storage + i, ft_strlen(storage) - i);
+	ft_strlcpy(str, storage + i, ft_strlen(storage) - i + 1);
 	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	*storage = 0;
 	char		*line;
 	char		*tmp;
 
@@ -92,17 +92,17 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-// 
-// 	fd = open("testfile", O_RDONLY);
-// 	line = "";
-// 	while (line)
-// 	{
-// 		line = get_next_line(fd);
-// 		printf("line:%s\n", line);
-// 		free(line);
-// 	}
-// }
+int	main(void)
+{
+	int		fd;
+	char	*line;
+
+	fd = open("testfile", O_RDONLY);
+	line = "";
+	while (line)
+	{
+		line = get_next_line(fd);
+		printf("line:%s\n", line);
+		free(line);
+	}
+}
