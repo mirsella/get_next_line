@@ -6,7 +6,7 @@
 /*   By: root </var/spool/mail/mirsella>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:08:27 by root              #+#    #+#             */
-/*   Updated: 2022/11/16 16:52:40 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:19:19 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
 void	*ft_memset(void *s, int c, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_next_line(int fd);
 

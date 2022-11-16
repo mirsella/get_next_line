@@ -6,7 +6,7 @@
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:54:00 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/16 16:57:28 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:21:35 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ char	*read_next_line(int fd, char *storage)
 	return (storage);
 }
 
+char	*get_line_from_buffer(char *storage)
+{
+	char	*str;
+	int	i;
+	
+	i = 0;
+	while (storage[i] || storage[i] != '\n')
+		i++;
+	if (storage[i] == '\n')
+		i++;
+	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	ft_strlcpy(str, storage, i);
+	return (str);
+}
+
+// char	*get_end_of_buffer(char *storage)
+// {
+// }
+
 char	*get_next_line(int fd)
 {
 	static char	*storage;
@@ -46,12 +67,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!storage || (storage && !ft_strchr(storage, '\n')))
 	{
-		// storage = read_next_line(fd) read from fd and store in storage
+		storage = read_next_line(fd, storage);
 	}
 	if (!storage)
 		return (NULL);
-	// line = get_line(storage)
-	// storage = save_end_of_buffer(storage)
+	line = get_line_from_buffer(storage);
+	// storage = get_end_of_buffer(storage);
 	return (line);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:34:19 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/16 16:19:04 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:18:46 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ void	*ft_memset(void *s, int c, size_t n)
 	while (n--)
 		*p_s++ = c;
 	return (s);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (src[i] && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
