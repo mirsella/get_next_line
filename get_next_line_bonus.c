@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:54:00 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/17 16:09:12 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:59:04 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_next_line(int fd, char *storage)
 {
@@ -76,19 +76,19 @@ char	*get_end_of_buffer(char *storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
 	char		*line;
 	char		*tmp;
+	static char	*storage[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
-	if (!storage || (storage && !ft_strchr(storage, '\n')))
-		storage = read_next_line(fd, storage);
-	if (!storage)
+	if (!storage[fd] || (storage[fd] && !ft_strchr(storage[fd], '\n')))
+		storage[fd] = read_next_line(fd, storage[fd]);
+	if (!storage[fd])
 		return (NULL);
-	line = get_line_from_buffer(storage);
-	tmp = get_end_of_buffer(storage);
-	free(storage);
-	storage = tmp;
+	line = get_line_from_buffer(storage[fd]);
+	tmp = get_end_of_buffer(storage[fd]);
+	free(storage[fd]);
+	storage[fd] = tmp;
 	return (line);
 }
