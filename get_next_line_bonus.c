@@ -6,7 +6,7 @@
 /*   By: mirsella <mirsella@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:54:00 by mirsella          #+#    #+#             */
-/*   Updated: 2022/11/17 15:59:04 by mirsella         ###   ########.fr       */
+/*   Updated: 2022/11/17 19:30:59 by mirsella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,3 +92,20 @@ char	*get_next_line(int fd)
 	storage[fd] = tmp;
 	return (line);
 }
+
+// #include "stdio.h"
+// #include "fcntl.h"
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
+// 
+// 	fd = open("testfile", O_RDONLY);
+// 	line = "";
+// 	while (line)
+// 	{
+// 		line = get_next_line(fd);
+// 		printf("line:%s\n", line);
+// 		free(line);
+// 	}
+// }
