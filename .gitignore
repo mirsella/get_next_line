@@ -1,6 +1,5 @@
 *.out
 *.o
 *.gch
-gnlTester
 testfile
-nl
+gnlTester
